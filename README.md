@@ -11,13 +11,21 @@ npm install
 ```
 
 ### 2. Run Tests
-*   **Full Audit**: Run performance, visual, crawl, and submission tests:
+*   **Master Audit (All Devices)**: Run everything (Desktop + Mobile) at once:
     ```bash
-    npm test tests/submission-and-crawl.spec.ts
+    npx playwright test
     ```
-*   **Integrity Check**: Basic link and page status check:
+*   **Global Form & Redirection Audit**: Deep crawl and form validation:
     ```bash
-    npm test tests/website-integrity.spec.ts
+    npx playwright test tests/global-audit.spec.ts
+    ```
+*   **Mobile Audit**: Run tests specifically for mobile projects:
+    ```bash
+    npx playwright test --project="Mobile Chrome" --project="Mobile Safari"
+    ```
+*   **Generate Report**: View the technical HTML results:
+    ```bash
+    npx playwright show-report
     ```
 *   **UI Mode**: Interactive dashboard for debugging:
     ```bash

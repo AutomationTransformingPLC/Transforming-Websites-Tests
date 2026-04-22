@@ -104,5 +104,44 @@ The following evidence has been captured and stored in the project's snapshots d
 
 ---
 
-## 🏁 8. Final Audit Verdict: **FAIL**
-Due to the **broken phone link**, **null navigation buttons**, and **severe Firefox performance issues**, the current UAT build is **NOT RECOMMENDED** for production release. Immediate focus should be placed on the navigation and performance layers.
+## 📱 8. Mobile Rendering & Responsiveness Audit
+A dedicated audit was performed using **Pixel 5** and **iPhone 12** emulation to evaluate the mobile experience.
+
+### 8.1 Layout Integrity
+*   ✅ **Responsiveness**: Both sites are fully responsive. Content scales correctly, and no horizontal scrolling/overflow issues were detected.
+*   ✅ **Interactive Elements**: Burger menus on both domains are functional and provide clear navigation overlays.
+*   ✅ **Touch Targets**: Buttons and form fields are appropriately sized for touch interactions with sufficient padding.
+
+### 8.2 Mobile Burger Menu Audit
+An exhaustive audit of the mobile navigation menus revealed the following:
+*   ✅ **Form Accessibility**: All major forms (Referral, Contact) are accessible via the mobile menu on both domains.
+*   ⚠️ **Redundant /home/ Link**: The PLC mobile menu contains a "Homepage" link targeting **`/home/`**. This is inconsistent with modern UX patterns where the brand logo serves as the homepage link.
+*   ✅ **Menu Link Integrity**: Unlike the homepage CTAs, the "Contact Us" links within the mobile burger menus are correctly mapped to `/contact-us-page/`.
+
+### 8.3 Critical Mobile Failure: Tap-to-Call
+*   🚨 **Issue**: The broken phone link (`0303 300 3000`) in both the global header and footer is a high-priority blocker for mobile users.
+*   **Behavior**: Mobile users attempting to "Tap-to-Call" are redirected to a **404 Not Found** page. 
+
+---
+
+## 🛠 9. Strategic Improvements & Roadmap
+
+### 9.1 Priority 1: Mobile-Specific UX
+1.  **Sticky Call-to-Action**: Implement a sticky "Make Referral" or "Contact Us" button at the bottom of the viewport for mobile devices. This ensures the primary conversion path is always accessible without scrolling.
+2.  **Dialer Protocol**: Immediately fix the phone number link by wrapping it in `tel:+443033003000`. This will enable the native device dialer.
+3.  **Keyboard Optimization**: Ensure form inputs (especially on the Referral form) use appropriate `inputmode` attributes (e.g., `numeric` for phone numbers) to trigger the correct mobile keyboard.
+
+### 9.2 Priority 2: Navigation & Logic Fixes
+1.  **Uniform URI Protocols**: Fix the broken phone links.
+2.  **Href Validation**: Replace the `null` href on the PLC homepage "Contact Us" button.
+3.  **Redirection Audit**: Remove all redirections to `/home/` and point them to the root `/` or relevant sub-pages.
+
+### 9.3 Priority 3: Performance (Critical for Firefox Mobile)
+1.  **Asset Compression**: Enable Brotli/Gzip on the server.
+2.  **Image Optimization**: Convert large PNG assets to WebP for mobile users to reduce data usage and speed up rendering.
+
+---
+
+## 🏁 10. Final Audit Verdict: **FAIL**
+The UAT build is **NOT RECOMMENDED** for production. While the mobile layout is visually professional and responsive, the **Tap-to-Call failure** and **null navigation CTAs** represent significant functional risks that will negatively impact conversion rates. 
+
