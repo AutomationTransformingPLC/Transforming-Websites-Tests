@@ -3,14 +3,14 @@ import { test, expect } from '@playwright/test';
 const SITES = [
   {
     name: 'Transforming PLC',
-    url: 'https://www.transforming.plc.uk/',
-    contactUrl: 'https://www.transforming.plc.uk/contact-us/'
+    url: 'https://uat.transforming.plc.uk/',
+    contactUrl: 'https://uat.transforming.plc.uk/contact-us/'
   },
   {
     name: 'Transforming Support',
-    url: 'https://www.transformingsupport.uk/',
-    contactUrl: 'https://www.transformingsupport.uk/contact-form/',
-    referralUrl: 'https://www.transformingsupport.uk/referral-form/'
+    url: 'https://uat.transformingsupport.uk/',
+    contactUrl: 'https://uat.transformingsupport.uk/contact-form/',
+    referralUrl: 'https://uat.transformingsupport.uk/referral-form/'
   }
 ];
 
@@ -58,7 +58,7 @@ test.describe('Advanced Website Integrity Audit', () => {
 
   test('Deep Crawl & Navigation Audit', async ({ page }) => {
     test.setTimeout(600000); // 10 minutes for deep crawl
-    const startUrl = 'https://www.transformingsupport.uk/';
+    const startUrl = 'https://uat.transformingsupport.uk/';
     await page.goto(startUrl);
     await page.waitForLoadState('networkidle');
 

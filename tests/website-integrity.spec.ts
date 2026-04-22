@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 const SITES = [
   {
     name: 'Transforming PLC',
-    url: 'https://www.transforming.plc.uk/',
+    url: 'https://uat.transforming.plc.uk/',
     subtabs: [
       'mission-statement-and-values/',
       'leadership-team',
@@ -19,7 +19,7 @@ const SITES = [
   },
   {
     name: 'Transforming Support',
-    url: 'https://www.transformingsupport.uk/',
+    url: 'https://uat.transformingsupport.uk/',
     subtabs: [
       'who-do-we-support',
       'people-we-support-feedback',

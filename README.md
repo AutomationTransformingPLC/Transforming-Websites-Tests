@@ -1,6 +1,6 @@
-# Automated Website Integrity Testing
+# UAT Website Integrity Testing Suite
 
-Comprehensive testing suite for `transforming.plc.uk` and `transformingsupport.uk` using Playwright.
+Comprehensive testing suite for `uat.transforming.plc.uk` and `uat.transformingsupport.uk` using Playwright.
 
 ## 🚀 Workflow
 
