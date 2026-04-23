@@ -104,44 +104,32 @@ The following evidence has been captured and stored in the project's snapshots d
 
 ---
 
-## 📱 8. Mobile Rendering & Responsiveness Audit
-A dedicated audit was performed using **Pixel 5** and **iPhone 12** emulation to evaluate the mobile experience.
+## 🔄 11. "Switch Sites" Module Deep Dive
+A targeted audit was conducted on the "Switch Sites" module to verify its behavior across Desktop and Mobile environments.
 
-### 8.1 Layout Integrity
-*   ✅ **Responsiveness**: Both sites are fully responsive. Content scales correctly, and no horizontal scrolling/overflow issues were detected.
-*   ✅ **Interactive Elements**: Burger menus on both domains are functional and provide clear navigation overlays.
-*   ✅ **Touch Targets**: Buttons and form fields are appropriately sized for touch interactions with sufficient padding.
+### 11.1 Platform-Specific Implementation
+*   **Desktop Trigger**: `<button class="switchSite_switchButton__ZMy9o">`
+*   **Mobile Trigger**: `<button class="button_theme4__nJzSY">` (Labeled "Switch Sites here")
+*   **Observation**: The mobile button is often located in the page footer or outside the initial viewport, requiring forced scrolling for interaction.
 
-### 8.2 Mobile Burger Menu Audit
-An exhaustive audit of the mobile navigation menus revealed the following:
-*   ✅ **Form Accessibility**: All major forms (Referral, Contact) are accessible via the mobile menu on both domains.
-*   ⚠️ **Redundant /home/ Link**: The PLC mobile menu contains a "Homepage" link targeting **`/home/`**. This is inconsistent with modern UX patterns where the brand logo serves as the homepage link.
-*   ✅ **Menu Link Integrity**: Unlike the homepage CTAs, the "Contact Us" links within the mobile burger menus are correctly mapped to `/contact-us-page/`.
-
-### 8.3 Critical Mobile Failure: Tap-to-Call
-*   🚨 **Issue**: The broken phone link (`0303 300 3000`) in both the global header and footer is a high-priority blocker for mobile users.
-*   **Behavior**: Mobile users attempting to "Tap-to-Call" are redirected to a **404 Not Found** page. 
+### 11.2 Critical Technical Failures
+| Issue Type | Discovery | Technical Detail |
+| :--- | :--- | :--- |
+| **Empty Switcher (PLC)** | 🚨 **Blocker** | When clicked on `uat.transforming.plc.uk`, the overlay appears but is **completely empty** (no links), containing only a "Back" button. |
+| **Environment Leak** | 🚨 **Critical** | On `uat.transformingsupport.uk`, the switcher links target the **Production Domain** (`transforming.plc.uk`) instead of UAT. |
+| **Mobile viewport Bug** | ⚠️ **UX Risk** | Automated tests consistently report the mobile trigger as "outside the viewport" even after scrolling, suggesting potential issues with sticky containers or overflow-hidden parent elements. |
 
 ---
 
-## 🛠 9. Strategic Improvements & Roadmap
+## 🏁 12. Final Audit Verdict: **FAIL**
+The UAT build is **NOT RECOMMENDED** for production release. 
 
-### 9.1 Priority 1: Mobile-Specific UX
-1.  **Sticky Call-to-Action**: Implement a sticky "Make Referral" or "Contact Us" button at the bottom of the viewport for mobile devices. This ensures the primary conversion path is always accessible without scrolling.
-2.  **Dialer Protocol**: Immediately fix the phone number link by wrapping it in `tel:+443033003000`. This will enable the native device dialer.
-3.  **Keyboard Optimization**: Ensure form inputs (especially on the Referral form) use appropriate `inputmode` attributes (e.g., `numeric` for phone numbers) to trigger the correct mobile keyboard.
+### **Consolidated Blocker List:**
+1.  **Broken Tap-to-Call**: Phone links lead to 404 pages.
+2.  **Dead Navigation**: "Contact Us" buttons with `null` hrefs on PLC homepage.
+3.  **Broken Switcher**: The PLC "Switch Sites" overlay is empty.
+4.  **Security/UX Leak**: Switcher links redirect users from UAT to Production.
+5.  **Performance**: Severe Firefox thread-blockage during form interactions.
 
-### 9.2 Priority 2: Navigation & Logic Fixes
-1.  **Uniform URI Protocols**: Fix the broken phone links.
-2.  **Href Validation**: Replace the `null` href on the PLC homepage "Contact Us" button.
-3.  **Redirection Audit**: Remove all redirections to `/home/` and point them to the root `/` or relevant sub-pages.
-
-### 9.3 Priority 3: Performance (Critical for Firefox Mobile)
-1.  **Asset Compression**: Enable Brotli/Gzip on the server.
-2.  **Image Optimization**: Convert large PNG assets to WebP for mobile users to reduce data usage and speed up rendering.
-
----
-
-## 🏁 10. Final Audit Verdict: **FAIL**
-The UAT build is **NOT RECOMMENDED** for production. While the mobile layout is visually professional and responsive, the **Tap-to-Call failure** and **null navigation CTAs** represent significant functional risks that will negatively impact conversion rates. 
+**Recommendation**: Prioritize fixing the **Environment Redirection Logic** and the **PLC Switcher Content** before the next UAT cycle.
 

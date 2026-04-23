@@ -42,7 +42,6 @@ Call log:
        - element is outside of the viewport
      - retrying click action
        - waiting 500ms
-    - waiting for element to be visible, enabled and stable
 
 ```
 
