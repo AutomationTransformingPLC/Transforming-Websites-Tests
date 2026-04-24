@@ -6,8 +6,8 @@
 
 # Test info
 
-- Name: website-integrity.spec.ts >> Full Website Integrity Audit >> Transforming Support Audit >> Internal Link Health (Sampled Crawl)
-- Location: tests\website-integrity.spec.ts:66:11
+- Name: inspect-switcher.spec.ts >> Switch Sites Deep UI Audit >> Inspect Switcher UI Structure
+- Location: tests\inspect-switcher.spec.ts:4:7
 
 # Error details
 
@@ -16,24 +16,23 @@ Test timeout of 30000ms exceeded.
 ```
 
 ```
-Error: apiRequestContext.get: Target page, context or browser has been closed
+Error: locator.click: Test timeout of 30000ms exceeded.
 Call log:
-  - → GET https://uat.transformingsupport.uk/staff/
-    - user-agent: Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.7727.15 Mobile Safari/537.36
-    - accept: */*
-    - accept-encoding: gzip,deflate,br
-  - ← 308 Permanent Redirect
-    - server: nginx/1.29.6
-    - date: Thu, 23 Apr 2026 13:47:17 GMT
-    - transfer-encoding: chunked
-    - connection: keep-alive
-    - location: /staff
-    - refresh: 0;url=/staff
-    - strict-transport-security: max-age=31536000; includeSubDomains; preload
-  - → GET https://uat.transformingsupport.uk/staff
-    - user-agent: Mozilla/5.0 (Linux; Android 11; Pixel 5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.7727.15 Mobile Safari/537.36
-    - accept: */*
-    - accept-encoding: gzip,deflate,br
+  - waiting for locator('button.switchSite_switchButton__ZMy9o')
+    - locator resolved to <button type="button" class="switchSite_switchButton__ZMy9o">…</button>
+  - attempting click action
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+    - waiting 20ms
+    2 × waiting for element to be visible, enabled and stable
+      - element is not visible
+    - retrying click action
+      - waiting 100ms
+    52 × waiting for element to be visible, enabled and stable
+       - element is not visible
+     - retrying click action
+       - waiting 500ms
 
 ```
 
@@ -628,96 +627,46 @@ Call log:
 # Test source
 
 ```ts
-  1  | import { test, expect } from '@playwright/test';
+  1  | import { test, expect, devices } from '@playwright/test';
   2  | 
-  3  | const SITES = [
-  4  |   {
-  5  |     name: 'Transforming PLC',
-  6  |     url: 'https://uat.transforming.plc.uk/',
-  7  |     subtabs: [
-  8  |       'mission-statement-and-values/',
-  9  |       'leadership-team',
-  10 |       'meet-the-board',
-  11 |       'nurture-support/',
-  12 |       'transforming-support/',
-  13 |       'ascend-support/',
-  14 |       'transforming-developments/',
-  15 |       'why-work-at-transforming-plc',
-  16 |       'recruitment/',
-  17 |       'contact-us/'
-  18 |     ]
-  19 |   },
-  20 |   {
-  21 |     name: 'Transforming Support',
-  22 |     url: 'https://uat.transformingsupport.uk/',
-  23 |     subtabs: [
-  24 |       'who-do-we-support',
-  25 |       'people-we-support-feedback',
-  26 |       'locations',
-  27 |       'staff/',
-  28 |       'how-do-we-support-families',
-  29 |       'support-tiers',
-  30 |       'transitioning-to-supported-living',
-  31 |       'referral-process',
-  32 |       'tenancy',
-  33 |       'quality-assurance',
-  34 |       'safeguarding',
-  35 |       'referral-form/'
-  36 |     ]
-  37 |   }
-  38 | ];
-  39 | 
-  40 | test.describe('Full Website Integrity Audit', () => {
-  41 |   for (const site of SITES) {
-  42 |     test.describe(`${site.name} Audit`, () => {
-  43 |       
-  44 |       test('Homepage and SEO verification', async ({ page }) => {
-  45 |         const response = await page.goto(site.url);
-  46 |         expect(response?.status()).toBe(200);
-  47 |         await expect(page).toHaveTitle(/.+/); // Ensure title exists
-  48 |         
-  49 |         // Check for common SEO/Meta tags
-  50 |         const description = await page.locator('meta[name="description"]').getAttribute('content');
-  51 |         expect(description).toBeTruthy();
-  52 |       });
-  53 | 
-  54 |       test('Subtab Integrity Check (Navigation & Status)', async ({ page }) => {
-  55 |         for (const path of site.subtabs) {
-  56 |           const fullUrl = site.url + path;
-  57 |           const response = await page.goto(fullUrl, { waitUntil: 'domcontentloaded' });
-  58 |           expect(response?.status(), `Subtab ${fullUrl} failed with status ${response?.status()}`).toBe(200);
-  59 |           
-  60 |           // Verify main content area is present
-  61 |           await expect(page.locator('main, #main, article, .content').first()).toBeVisible();
-  62 |           console.log(`✓ Verified: ${fullUrl}`);
-  63 |         }
-  64 |       });
-  65 | 
-  66 |       test('Internal Link Health (Sampled Crawl)', async ({ page }) => {
-  67 |         await page.goto(site.url);
-  68 |         const links = await page.locator('a').evaluateAll((elements, base) => 
-  69 |           elements
-  70 |             .map(el => (el as HTMLAnchorElement).href)
-  71 |             .filter(href => href.startsWith(base) && !href.includes('#'))
-  72 |         , site.url);
-  73 | 
-  74 |         const uniqueLinks = Array.from(new Set(links)).slice(0, 20); // Expanded sample
-  75 |         
-  76 |         for (const link of uniqueLinks) {
-> 77 |           const response = await page.request.get(link);
-     |                                               ^ Error: apiRequestContext.get: Target page, context or browser has been closed
-  78 |           expect(response.status(), `Broken link found: ${link}`).toBeLessThan(400);
-  79 |         }
-  80 |       });
-  81 | 
-  82 |       test('Responsive Layout Verification', async ({ page }) => {
-  83 |         await page.goto(site.url);
-  84 |         // Check header/footer on different viewports (Playwright handles this via projects, but we can check visibility)
-  85 |         await expect(page.locator('header')).toBeVisible();
-  86 |         await expect(page.locator('footer')).toBeVisible();
-  87 |       });
-  88 |     });
-  89 |   }
-  90 | });
-  91 | 
+  3  | test.describe('Switch Sites Deep UI Audit', () => {
+  4  |   test('Inspect Switcher UI Structure', async ({ page }) => {
+  5  |     await page.goto('https://uat.transformingsupport.uk/');
+  6  |     
+  7  |     const switchButton = page.locator('button.switchSite_switchButton__ZMy9o');
+> 8  |     await switchButton.click();
+     |                        ^ Error: locator.click: Test timeout of 30000ms exceeded.
+  9  |     await page.waitForTimeout(1000);
+  10 | 
+  11 |     const switcherWrapper = page.locator('div[data-testid="container"].switchSite_wrapper__sHfOw');
+  12 |     
+  13 |     const wrapperHtml = await switcherWrapper.innerHTML();
+  14 |     console.log('--- Full Switcher Wrapper HTML ---');
+  15 |     console.log(wrapperHtml);
+  16 |     
+  17 |     const details = await switcherWrapper.evaluate((el) => {
+  18 |         const results: any[] = [];
+  19 |         const all = el.querySelectorAll('*');
+  20 |         all.forEach((item: any) => {
+  21 |             if (item.className && item.className.includes('switchSite')) {
+  22 |                 results.push({
+  23 |                     tag: item.tagName,
+  24 |                     text: item.innerText.trim(),
+  25 |                     classes: item.className,
+  26 |                     href: item.getAttribute('href')
+  27 |                 });
+  28 |             }
+  29 |         });
+  30 |         return results;
+  31 |     });
+  32 | 
+  33 |     console.log('--- Switcher UI Items ---');
+  34 |     details.forEach((item, i) => {
+  35 |         console.log(`Item ${i}: ${item.text.replace(/\n/g, ' ')}`);
+  36 |         console.log(`Classes: ${item.classes}`);
+  37 |         console.log(`HTML: ${item.html.substring(0, 200)}...`);
+  38 |     });
+  39 |   });
+  40 | });
+  41 | 
 ```

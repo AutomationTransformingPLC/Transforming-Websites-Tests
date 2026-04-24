@@ -1,0 +1,502 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: inspect-switcher.spec.ts >> Switch Sites Deep UI Audit >> Inspect Switcher UI Structure
+- Location: tests\inspect-switcher.spec.ts:4:7
+
+# Error details
+
+```
+Error: locator.evaluate: TypeError: item.className.includes is not a function
+    at eval (eval at evaluate (:302:30), <anonymous>:5:46)
+    at NodeList.forEach (<anonymous>)
+    at eval (eval at evaluate (:302:30), <anonymous>:4:11)
+    at UtilityScript.evaluate (<anonymous>:304:16)
+    at UtilityScript.<anonymous> (<anonymous>:1:44)
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=e1]:
+  - dialog "cookieconsent" [ref=e2]:
+    - generic [ref=e3]:
+      - paragraph [ref=e4]: By accessing our site you agree to the storing of cookies on your device to enhance site navigation, analyse site usage, and assist in our marketing efforts.
+      - button "learn more about cookies" [ref=e5] [cursor=pointer]: How do we support - Families
+    - generic [ref=e6]:
+      - button "deny cookies" [ref=e7] [cursor=pointer]: Dismiss
+      - button "allow cookies" [ref=e8] [cursor=pointer]: Accept
+  - generic [ref=e9]:
+    - link "Skip To Content" [ref=e10] [cursor=pointer]:
+      - /url: "#main"
+    - banner [ref=e11]:
+      - generic [ref=e12]:
+        - button "close" [ref=e13] [cursor=pointer]:
+          - img [ref=e14]
+        - button "Hide Sites Switch Sites" [active] [ref=e16] [cursor=pointer]:
+          - img [ref=e18]
+          - generic [ref=e20]:
+            - generic [ref=e21]: Hide Sites
+            - generic [ref=e22]: Switch Sites
+          - img [ref=e24]
+          - img [ref=e27]
+        - generic [ref=e29]:
+          - generic [ref=e30]:
+            - generic [ref=e31]: Switch Sites
+            - generic [ref=e32]: Our brands offer different levels of support
+          - generic [ref=e33]:
+            - link "Green Ascend Logo Ascend Support Person-centred outreach and community support" [ref=e35] [cursor=pointer]:
+              - /url: https://transforming.plc.uk/ascend-support
+              - generic [ref=e36]:
+                - img "Green Ascend Logo" [ref=e38]
+                - generic [ref=e39]:
+                  - generic [ref=e40]: Ascend Support
+                  - generic [ref=e41]: Person-centred outreach and community support
+            - generic [ref=e43] [cursor=pointer]:
+              - generic [ref=e44]: You are on this site
+              - generic [ref=e45]:
+                - img "Purple Transforming Healthcare Logo" [ref=e47]
+                - generic [ref=e48]:
+                  - generic [ref=e49]: Transforming Support
+                  - generic [ref=e50]: Person-centred supported living services
+            - generic [ref=e52]:
+              - generic [ref=e53]: Coming soon
+              - generic [ref=e54]:
+                - img "Pink Heart Logo" [ref=e56]
+                - generic [ref=e57]:
+                  - generic [ref=e58]: Nurture Support
+                  - generic [ref=e59]: Person-centred residential support
+      - generic [ref=e60]:
+        - link "Transforming Logo" [ref=e61] [cursor=pointer]:
+          - /url: /
+          - img "Transforming Logo" [ref=e62]
+        - navigation [ref=e63]:
+          - list [ref=e64]:
+            - listitem [ref=e65]:
+              - button "For Individuals" [ref=e66] [cursor=pointer]:
+                - generic [ref=e67]: For Individuals
+                - img [ref=e68]
+            - listitem [ref=e70]:
+              - button "For Families" [ref=e71] [cursor=pointer]:
+                - generic [ref=e72]: For Families
+                - img [ref=e73]
+            - listitem [ref=e75]:
+              - button "For Professionals" [ref=e76] [cursor=pointer]:
+                - generic [ref=e77]: For Professionals
+                - img [ref=e78]
+            - listitem [ref=e80]:
+              - button "Careers" [ref=e81] [cursor=pointer]:
+                - generic [ref=e82]: Careers
+                - img [ref=e83]
+            - listitem [ref=e85]:
+              - button "Locations" [ref=e86] [cursor=pointer]:
+                - generic [ref=e87]: Locations
+                - img [ref=e88]
+        - link "0800 048 5792" [ref=e90] [cursor=pointer]:
+          - /url: tel:0800 048 5792
+          - img [ref=e92]
+          - generic [ref=e94]: 0800 048 5792
+        - link "Make Referral" [ref=e95] [cursor=pointer]:
+          - /url: /referral-form/
+          - text: Make Referral
+          - img [ref=e96]
+    - main [ref=e98]:
+      - generic [ref=e102]:
+        - generic [ref=e103]:
+          - heading "Personalised support for individuals, built around you." [level=1] [ref=e104]:
+            - text: Personalised support for individuals,
+            - generic [ref=e105]:
+              - text: built around you.
+              - generic:
+                - img
+          - paragraph [ref=e107]: Transforming Support offers personalised supported living and community support services for people with learning disabilities, autism, or other complex needs across the UK. Our focus is on providing independence and quality of life with specialised, person-centred support.
+        - link "Make Referral" [ref=e109] [cursor=pointer]:
+          - /url: /referral-form/
+      - generic [ref=e113]:
+        - generic [ref=e114]: Find support in your area
+        - generic [ref=e115]:
+          - generic [ref=e116]: "Search for:"
+          - generic [ref=e117] [cursor=pointer]:
+            - radio "Locations" [checked] [ref=e118]
+            - text: Locations
+          - generic [ref=e119] [cursor=pointer]:
+            - radio "Staff" [ref=e120]
+            - text: Staff
+        - generic [ref=e121]:
+          - generic [ref=e122] [cursor=pointer]:
+            - generic [ref=e123]:
+              - generic [ref=e124]:
+                - generic [ref=e125]: Services
+                - textbox "All Services"
+              - img [ref=e127]
+            - generic:
+              - generic:
+                - generic:
+                  - img
+                - checkbox [checked]
+                - generic: All Services
+              - generic:
+                - generic:
+                  - img
+                - checkbox "Acquired Brain Injury"
+                - generic: Acquired Brain Injury
+              - generic:
+                - generic:
+                  - img
+                - checkbox "Autism"
+                - generic: Autism
+              - generic:
+                - generic:
+                  - img
+                - checkbox "Community Outreach"
+                - generic: Community Outreach
+              - generic:
+                - generic:
+                  - img
+                - checkbox "Complex Care"
+                - generic: Complex Care
+              - generic:
+                - generic:
+                  - img
+                - checkbox "Learning Disabilities"
+                - generic: Learning Disabilities
+              - generic:
+                - generic:
+                  - img
+                - checkbox "Mental Health"
+                - generic: Mental Health
+              - generic:
+                - generic:
+                  - img
+                - checkbox "Neurodiversity"
+                - generic: Neurodiversity
+              - generic:
+                - generic:
+                  - img
+                - checkbox "Physical Disabilities"
+                - generic: Physical Disabilities
+              - generic:
+                - generic:
+                  - img
+                - checkbox "Respite Care"
+                - generic: Respite Care
+              - generic:
+                - generic:
+                  - img
+                - checkbox "Specialist Services"
+                - generic: Specialist Services
+              - generic:
+                - generic:
+                  - img
+                - checkbox "Specialist Services - Forensic"
+                - generic: Specialist Services - Forensic
+          - generic [ref=e129] [cursor=pointer]:
+            - generic [ref=e130]:
+              - generic [ref=e131]:
+                - generic [ref=e132]: Region
+                - textbox "All Region"
+              - img [ref=e134]
+            - generic:
+              - generic:
+                - generic: All Region
+              - generic: Greater London
+              - generic: Midlands
+              - generic: North East
+              - generic: North West
+              - generic: South East
+              - generic: South West
+          - button "Search" [ref=e136] [cursor=pointer]:
+            - text: Search
+            - img [ref=e137]
+      - generic [ref=e141]:
+        - generic [ref=e142]:
+          - heading "We support people with learning disabilities, autism, and/or complex needs, through our core services which includes outreach." [level=2] [ref=e144]
+          - generic [ref=e145]:
+            - group [ref=e146]:
+              - generic "What is supported living?" [ref=e147] [cursor=pointer]:
+                - generic [ref=e148]: What is supported living?
+                - img [ref=e150]
+            - group [ref=e152]:
+              - generic "How do we support people?" [ref=e153] [cursor=pointer]:
+                - generic [ref=e154]: How do we support people?
+                - img [ref=e156]
+            - group [ref=e158]:
+              - generic "How to make a referral" [ref=e159] [cursor=pointer]:
+                - generic [ref=e160]: How to make a referral
+                - img [ref=e162]
+            - group [ref=e164]:
+              - generic "What is outreach support?" [ref=e165] [cursor=pointer]:
+                - generic [ref=e166]: What is outreach support?
+                - img [ref=e168]
+            - group [ref=e170]:
+              - generic "Information for GPs, Commissioners, and Professionals" [ref=e171] [cursor=pointer]:
+                - generic [ref=e172]: Information for GPs, Commissioners, and Professionals
+                - img [ref=e174]
+        - generic [ref=e178]:
+          - heading "Important:" [level=2] [ref=e179]
+          - paragraph [ref=e181]: Please ensure that consent has been given should you wish to discuss any personal or private medical details. All information will be treated and processed in accordance with the CALDICOTTS and current Data Protection Legislation.
+      - generic [ref=e185]:
+        - generic [ref=e186]:
+          - heading "Locations" [level=2] [ref=e187]
+          - paragraph [ref=e189]: We operate across the whole United Kingdom both at supported living and outreach levels (subject to assessment). You can search for our locations below.
+        - generic [ref=e190] [cursor=pointer]:
+          - generic [ref=e191]: Select Location
+          - generic [ref=e192]:
+            - generic:
+              - img
+            - combobox [ref=e193]:
+              - option "Jump to location" [disabled] [selected]
+              - option "Chipstead Court"
+              - option "Cross Court"
+              - option "Prinsted"
+              - option "St Julian's Farm Road"
+              - option "Temple Road"
+              - option "Horsham Road"
+              - 'option "London Office: New City Court"'
+              - 'option "Manchester Office: John Dalton Street"'
+              - 'option "Birmingham Office: Birmingham Business Park"'
+              - option "Hampton Woods"
+              - option "Harvest Rise"
+              - option "Safari"
+              - option "Starling Close"
+            - generic:
+              - img
+      - generic [ref=e199]:
+        - generic [ref=e200]:
+          - heading "The Transforming Support journey to living more independently." [level=2] [ref=e201]:
+            - text: The Transforming Support journey to living more
+            - generic [ref=e202]:
+              - text: independently.
+              - generic:
+                - img
+          - paragraph [ref=e204]: "Specialisms we support:"
+        - generic [ref=e205]:
+          - group [ref=e206]:
+            - generic "Learning Disabilities" [ref=e207] [cursor=pointer]:
+              - generic [ref=e208]: Learning Disabilities
+              - img [ref=e210]
+          - group [ref=e212]:
+            - generic "Autism" [ref=e213] [cursor=pointer]:
+              - generic [ref=e214]: Autism
+              - img [ref=e216]
+          - group [ref=e218]:
+            - generic "Physical Disabilities" [ref=e219] [cursor=pointer]:
+              - generic [ref=e220]: Physical Disabilities
+              - img [ref=e222]
+          - group [ref=e224]:
+            - generic "Mental Health" [ref=e225] [cursor=pointer]:
+              - generic [ref=e226]: Mental Health
+              - img [ref=e228]
+          - group [ref=e230]:
+            - generic "Neurodiversity" [ref=e231] [cursor=pointer]:
+              - generic [ref=e232]: Neurodiversity
+              - img [ref=e234]
+          - group [ref=e236]:
+            - generic "Acquired Brain Injuries" [ref=e237] [cursor=pointer]:
+              - generic [ref=e238]: Acquired Brain Injuries
+              - img [ref=e240]
+          - group [ref=e242]:
+            - generic "Outreach Services" [ref=e243] [cursor=pointer]:
+              - generic [ref=e244]: Outreach Services
+              - img [ref=e246]
+          - group [ref=e248]:
+            - generic "Forensic Specialist Services (Professional Only)" [ref=e249] [cursor=pointer]:
+              - generic [ref=e250]: Forensic Specialist Services (Professional Only)
+              - img [ref=e252]
+      - generic [ref=e258]:
+        - generic [ref=e259]:
+          - heading "Activities and Work Experience" [level=2] [ref=e260]
+          - paragraph [ref=e262]: At Transforming Support, we believe in working with people to create meaningful and fulfilling experiences that allow them to plan their daily living and future independence. This may include education, employment and/or volunteering.
+        - generic [ref=e263]:
+          - group [ref=e264]:
+            - generic "Employment" [ref=e265] [cursor=pointer]:
+              - generic [ref=e266]: Employment
+              - img [ref=e268]
+          - group [ref=e270]:
+            - generic "Education" [ref=e271] [cursor=pointer]:
+              - generic [ref=e272]: Education
+              - img [ref=e274]
+          - group [ref=e276]:
+            - generic "Activities" [ref=e277] [cursor=pointer]:
+              - generic [ref=e278]: Activities
+              - img [ref=e280]
+      - generic [ref=e285]:
+        - 'heading "Take a look inside our services: Chipstead Court" [level=2] [ref=e288]':
+          - text: "Take a look inside our services:"
+          - generic [ref=e289]:
+            - text: Chipstead Court
+            - generic:
+              - img
+        - generic [ref=e291]:
+          - img "yt thumbnail" [ref=e292]
+          - img [ref=e294] [cursor=pointer]
+      - generic [ref=e299]:
+        - generic [ref=e300]:
+          - heading "We can help make the transition to supported living easier." [level=2] [ref=e301]:
+            - text: We can help make the transition to supported living
+            - generic [ref=e302]:
+              - text: easier.
+              - generic:
+                - img
+          - paragraph [ref=e304]: Following an assessment, it is advisable to have a period of transition that allows us to make any agreed adaptations to the property. We work with each person to get to know them better and agree to any adjustments to their new level of support. This gives us all adequate time to complete the tenancy application, enabling the individual and their family to organise new items for their new home, ensuring a straightforward move.
+        - generic [ref=e305]:
+          - link "Learn More" [ref=e306] [cursor=pointer]:
+            - /url: /transitioning-to-supported-living/
+          - link "Make Referral" [ref=e307] [cursor=pointer]:
+            - /url: /referral-form/
+      - generic [ref=e310]:
+        - heading "Success Stories" [level=2] [ref=e312]:
+          - generic [ref=e313]:
+            - text: Success Stories
+            - generic:
+              - img
+        - generic [ref=e315]:
+          - generic "Carousel Navigation" [ref=e316]:
+            - button "Previous slide" [disabled] [ref=e317] [cursor=pointer]:
+              - img [ref=e318]
+              - generic [ref=e320]: Previous slide
+            - button "Next slide" [ref=e321] [cursor=pointer]:
+              - img [ref=e322]
+              - generic [ref=e324]: Next slide
+          - generic [ref=e325]:
+            - generic:
+              - text: slide
+              - generic: "1"
+              - text: of 2
+            - generic [ref=e327]:
+              - generic [ref=e328]:
+                - heading "J's Story" [level=3] [ref=e329]
+                - paragraph [ref=e330]: J moved into her own apartment following a short stay in a mental health crisis unit. Transforming Support began with many assessments to understand better how J could be supported while living in her local community. J was central to this assessment process and loved the positive discussions with the staff who visited her. They asked her about her hopes and wishes for the future, what was important to her, and her likes and dislikes, and she said she liked being able to talk with staff about her life.
+              - generic [ref=e331]:
+                - heading [level=3] [ref=e332]: J's Story
+                - paragraph [ref=e333]: J continues to live in her new home with care and support over a 24-hour period, and her behaviours have reduced significantly during this time; her health needs have also reduced as her independence has grown. She has been involved in the recruitment of her own support staff, which have skills and experience that match her health and care needs. She came into the apartment needing two support staff to help with her walking, but recently she has been doing aerobics in the garden with her support team. She said she feels safe in her apartment and likes living there.; compared to her previous experiences, this is a fantastic improvement, and it is wonderful to hear she is happy.
+      - generic [ref=e337]:
+        - heading "Refer an individual or family member to arrange a visit or discuss support" [level=2] [ref=e340]:
+          - text: Refer an individual or family member to
+          - generic [ref=e341]:
+            - text: arrange a visit
+            - generic:
+              - img
+          - text: or discuss support
+        - generic [ref=e342]:
+          - generic [ref=e343]:
+            - generic [ref=e344]:
+              - heading "Make a Referral" [level=2] [ref=e345]:
+                - text: Make a
+                - generic [ref=e346]:
+                  - text: Referral
+                  - generic:
+                    - img
+              - generic [ref=e347]:
+                - paragraph [ref=e348]: If you are an individual or a family member, please speak to your local health and social care professionals, who will make a referral on your behalf using the form or contact details below.
+                - paragraph [ref=e349]: If you have permission, please submit the contact details for your health representative, social worker, advocate or appointee.
+            - generic [ref=e350]:
+              - paragraph [ref=e351]: Alternatively, call us on
+              - generic [ref=e352]:
+                - img [ref=e353]
+                - link "0800 048 5792" [ref=e355] [cursor=pointer]:
+                  - /url: tel:0800048 5792
+          - generic [ref=e357]:
+            - generic [ref=e358]:
+              - generic [ref=e359]: Do you have consent to make this referral on behalf of this individual?
+              - textbox "Do you have consent to make this referral on behalf of this individual?" [ref=e360]:
+                - /placeholder: ""
+            - generic [ref=e361]:
+              - generic [ref=e362]: Social worker or professional's name
+              - textbox "Social worker or professional's name" [ref=e363]:
+                - /placeholder: Full Name
+            - generic [ref=e364]:
+              - generic [ref=e365]: Telephone Number
+              - textbox "Telephone Number" [ref=e366]
+            - generic [ref=e367]:
+              - generic [ref=e368]: Email Address
+              - textbox "Email Address" [ref=e369]
+            - generic [ref=e370]:
+              - generic [ref=e371]: Reference number for person being referred
+              - textbox "Reference number for person being referred" [ref=e372]:
+                - /placeholder: Reference Number for person being referred
+            - generic [ref=e373]:
+              - generic [ref=e374]: Date of birth of person being referred
+              - textbox "Date of birth of person being referred" [ref=e375]:
+                - /placeholder: ""
+            - generic [ref=e376]:
+              - generic [ref=e377]: Any other relevant information
+              - textbox "Any other relevant information" [ref=e378]:
+                - /placeholder: Additional questions or notes
+            - generic [ref=e379]:
+              - generic [ref=e380]: Please click here to confirm you have permission to submit the information above, and accept our T&C's to comply with regulatory GDPR guidelines.
+              - checkbox "Please click here to confirm you have permission to submit the information above, and accept our T&C's to comply with regulatory GDPR guidelines." [ref=e381]
+            - button "Submit Form" [ref=e382] [cursor=pointer]:
+              - text: Submit Form
+              - img [ref=e383]
+      - generic [ref=e387]:
+        - generic [ref=e388]:
+          - heading "Looking for more information?" [level=2] [ref=e389]
+          - paragraph [ref=e391]: If you require more information or want to make a referral, use the options below.
+        - generic [ref=e392]:
+          - link "Contact Us" [ref=e393] [cursor=pointer]:
+            - /url: /contact-form/
+          - link "Make Referral" [ref=e394] [cursor=pointer]:
+            - /url: /referral-form/
+    - contentinfo [ref=e395]:
+      - generic [ref=e396]:
+        - generic [ref=e397]:
+          - generic [ref=e398]:
+            - generic [ref=e399]: Families
+            - generic [ref=e400]:
+              - link "How do we support" [ref=e401] [cursor=pointer]:
+                - /url: /how-do-we-support-families
+              - link "Who do we support" [ref=e402] [cursor=pointer]:
+                - /url: /who-do-we-support
+              - link "Our locations" [ref=e403] [cursor=pointer]:
+                - /url: /locations
+          - generic [ref=e404]:
+            - generic [ref=e405]: Professionals
+            - generic [ref=e406]:
+              - link "How do we support" [ref=e407] [cursor=pointer]:
+                - /url: /how-do-we-support-professionals
+              - link "Support tiers" [ref=e408] [cursor=pointer]:
+                - /url: /support-tiers
+              - link "Locations" [ref=e409] [cursor=pointer]:
+                - /url: /locations
+          - generic [ref=e410]:
+            - generic [ref=e411]: The People We Support
+            - generic [ref=e412]:
+              - link "Who do we support" [ref=e413] [cursor=pointer]:
+                - /url: /who-do-we-support
+              - link "Useful Information" [ref=e414] [cursor=pointer]:
+                - /url: /useful-information
+          - generic [ref=e415]:
+            - generic [ref=e416]: Get in touch
+            - generic [ref=e417]:
+              - link "Contact us" [ref=e418] [cursor=pointer]:
+                - /url: https://www.transformingsupport.uk/referral-form
+              - link "Compliance and Statements" [ref=e419] [cursor=pointer]:
+                - /url: /compliance-and-statements
+            - generic [ref=e420]:
+              - link "https://www.facebook.com/TRFSupportUK/" [ref=e421] [cursor=pointer]:
+                - /url: https://www.facebook.com/TRFSupportUK/
+                - img "White Facebook Logo" [ref=e422]
+              - link "https://instagram.com/trfsupportuk?igshid=NTc4MTIwNjQ2YQ==" [ref=e423] [cursor=pointer]:
+                - /url: https://instagram.com/trfsupportuk?igshid=NTc4MTIwNjQ2YQ==
+                - img "White Instagram Logo" [ref=e424]
+              - link "https://twitter.com/trfsupportuk?s=21&t=inAChnC0WpuuKMH-BVQQXg" [ref=e425] [cursor=pointer]:
+                - /url: https://twitter.com/trfsupportuk?s=21&t=inAChnC0WpuuKMH-BVQQXg
+        - generic [ref=e426]:
+          - generic [ref=e427]:
+            - img "Transforming Logo White Text"
+          - generic [ref=e428]:
+            - generic [ref=e429]: Registered Office
+            - generic [ref=e430]:
+              - generic [ref=e431]: New City Court
+              - generic [ref=e432]: 20 St Thomas Street,
+              - generic [ref=e433]: London,
+              - generic [ref=e434]: SE1 9RS
+          - paragraph [ref=e436]: © Copyright Transforming PLC 2025
+  - alert [ref=e437]
+```

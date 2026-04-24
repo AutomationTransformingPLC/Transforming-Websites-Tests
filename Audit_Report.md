@@ -122,14 +122,30 @@ A targeted audit was conducted on the "Switch Sites" module to verify its behavi
 ---
 
 ## 🏁 12. Final Audit Verdict: **FAIL**
-The UAT build is **NOT RECOMMENDED** for production release. 
+The UAT build is **NOT RECOMMENDED** for production release due to core functional blockers.
 
 ### **Consolidated Blocker List:**
-1.  **Broken Tap-to-Call**: Phone links lead to 404 pages.
+1.  **Broken Tap-to-Call**: Phone links lead to 404 pages (Critical for mobile).
 2.  **Dead Navigation**: "Contact Us" buttons with `null` hrefs on PLC homepage.
-3.  **Broken Switcher**: The PLC "Switch Sites" overlay is empty.
-4.  **Security/UX Leak**: Switcher links redirect users from UAT to Production.
-5.  **Performance**: Severe Firefox thread-blockage during form interactions.
+3.  **Broken Switcher (PLC)**: The PLC "Switch Sites" overlay is empty or incomplete.
+4.  **Performance**: Severe Firefox thread-blockage during form interactions.
 
-**Recommendation**: Prioritize fixing the **Environment Redirection Logic** and the **PLC Switcher Content** before the next UAT cycle.
+---
+
+## 📋 13. Release Note Compliance Matrix (Switch Sites)
+The module was audited against the technical specifications in **CSI/RN/2026/04/02/1.0.6 (Sections 6.1.1 - 6.2)**.
+
+| Requirement | Spec | Audit Result | Status |
+| :--- | :--- | :--- | :--- |
+| **6.1.1 Site Name** | Text Box | Verified: Found in `.siteTeaser_title__xn4KO` | ✅ Pass |
+| **6.1.1 Site Logo** | Media Picker | Verified: Found in `.siteTeaser_logo__J1JRp` | ✅ Pass |
+| **6.1.1 Site Tagline** | Text Box | Verified: Found in `.siteTeaser_tagLine__v1zqo` | ✅ Pass |
+| **6.1.1 Site Link** | Link Picker | **Note**: Targets production domains. | ⚠️ Warning |
+| **6.1.1 Coming Soon** | Toggle | Verified: `siteTeaser_isComingSoon__yopiV` applied. | ✅ Pass |
+| **6.1.1 Active Toggle** | Toggle | Verified: `siteTeaser_isActive__2kcTW` applied. | ✅ Pass |
+| **6.2 UI Changes** | Active Styling | Verified: Active border and "You are on this site" text. | ✅ Pass |
+| **6.2 Redirection** | Click Logic | Users are sent to production sites when clicking links. | ⚠️ Warning |
+
+**Technical Note**: While the redirection to production (`https://transforming.plc.uk/`) is documented in the release notes, it may cause confusion for UAT testers who expect to remain within the staging environment (`uat.*`).
+
 

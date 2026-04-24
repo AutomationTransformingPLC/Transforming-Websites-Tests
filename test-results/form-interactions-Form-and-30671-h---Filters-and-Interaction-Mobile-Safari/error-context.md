@@ -35,7 +35,7 @@ Call log:
       - element is outside of the viewport
     - retrying click action
       - waiting 100ms
-    36 × waiting for element to be visible, enabled and stable
+    37 × waiting for element to be visible, enabled and stable
        - element is visible, enabled and stable
        - scrolling into view if needed
        - done scrolling
@@ -43,9 +43,6 @@ Call log:
      - retrying click action
        - waiting 500ms
     - waiting for element to be visible, enabled and stable
-    - element is visible, enabled and stable
-    - scrolling into view if needed
-    - done scrolling
 
 ```
 
